@@ -2,13 +2,18 @@
 
 手作娃娃衣的電商網站，版面依手繪稿製作。目前完成「首頁」。
 
-## 技術
+同一份設計做了**兩個版本**，外觀與功能完全一樣，挑一個往下發展就好：
 
-- Next.js 15（App Router）
+| 版本 | 位置 | 適合 |
+| --- | --- | --- |
+| Next.js | 專案根目錄 | 之後要做購物車、會員、後端 API |
+| 純 HTML/CSS/JS | `static/` | 只要展示、想直接改檔案、丟 GitHub Pages |
+
+## A. Next.js 版
+
+- Next.js 16（App Router）
 - React 19
 - CSS Modules（無額外 UI 套件）
-
-## 開始開發
 
 ```bash
 npm install
@@ -16,6 +21,19 @@ npm run dev
 ```
 
 開啟 http://localhost:3000
+
+## B. 純 HTML/CSS/JS 版
+
+不需要安裝任何東西，直接用瀏覽器打開 `static/index.html` 就會動。
+
+```
+static/
+  index.html   # 版面結構 + SVG 圖示庫
+  styles.css   # 全部樣式（開頭就是配色變數）
+  app.js       # 商品資料 + 選單/輪播互動
+```
+
+商品、分類、主打商品都寫在 `app.js` 最上面的三個陣列，改那裡即可。
 
 ## 配色
 

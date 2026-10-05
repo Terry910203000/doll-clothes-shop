@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOGO｜娃娃衣專賣</title>
+<meta name="description" content="手作娃娃衣專賣店，提供 30CM / 16CM / 10CM 各尺寸娃衣。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== SVG 圖示庫：下面用 <use href="#icon-xxx"> 取用 ===== -->
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <g id="icon-menu"><path d="M4 7h16M4 12h16M4 17h16"/></g>
+    <g id="icon-close"><path d="M6 6l12 12M18 6L6 18"/></g>
+    <g id="icon-user">
+      <circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3.2"/>
+      <path d="M6.2 19a6.2 6.2 0 0 1 11.6 0"/>
+    </g>
+    <g id="icon-cart">
+      <path d="M3 4h2.2l2.3 10.4a2 2 0 0 0 2 1.6h7.1a2 2 0 0 0 2-1.5L20 8H6"/>
+      <circle cx="10" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/>
+    </g>
+    <g id="icon-heart">
+      <path d="M12 20s-7.3-4.4-8.8-9A4.6 4.6 0 0 1 12 7.3 4.6 4.6 0 0 1 20.8 11c-1.5 4.6-8.8 9-8.8 9z"/>
+    </g>
+    <g id="icon-receipt">
+      <path d="M6 3h12v18l-2-1.4L14 21l-2-1.4L10 21l-2-1.4L6 21z"/><path d="M9 8h6M9 12h6"/>
+    </g>
+    <g id="icon-chevron"><path d="M9 5l7 7-7 7"/></g>
+    <g id="icon-prev"><path d="M15 5l-7 7 7 7"/></g>
+    <g id="icon-next"><path d="M9 5l7 7-7 7"/></g>
+    <g id="icon-instagram">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/>
+      <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>
+    </g>
+    <g id="icon-globe">
+      <circle cx="12" cy="12" r="8.5"/>
+      <path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.4 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.4-3.4-8.5S9.7 5.9 12 3.5z"/>
+    </g>
+  </defs>
+</svg>
+
+
+<!-- ===== 頂部列 ===== -->
+<header class="header">
+  <div class="header__inner">
+    <button class="icon-btn" id="btn-menu" aria-label="開啟商品分類選單" aria-expanded="false">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-menu"/></svg>
+    </button>
+
+    <a href="#" class="header__logo">LOGO</a>
+
+    <div class="header__actions">
+      <button class="icon-btn" id="btn-member" aria-label="會員選單" aria-expanded="false">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-user"/></svg>
+      </button>
+
+      <a href="#" class="icon-btn" aria-label="購物車">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-cart"/></svg>
+      </a>
+
+      <!-- 會員下拉（淺藍） -->
+      <div class="member" id="member-menu" aria-label="會員選單" inert>
+        <ul>
+          <li><a class="member__row" href="#">
+            <span class="member__icon"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-heart"/></svg></span>
+            <span class="member__label">收藏清單</span>
+            <svg class="icon icon--sm member__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron"/></svg>
+          </a></li>
+          <li><a class="member__row" href="#">
+            <span class="member__icon"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-user"/></svg></span>
+            <span class="member__label">個人資料</span>
+            <svg class="icon icon--sm member__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron"/></svg>
+          </a></li>
+          <li><a class="member__row" href="#">
+            <span class="member__icon"><svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-receipt"/></svg></span>
+            <span class="member__label">購買記錄</span>
+            <svg class="icon icon--sm member__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron"/></svg>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- ===== 左側分類抽屜（粉紅） ===== -->
+<div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+
+<aside class="drawer" id="drawer" tabindex="-1" aria-label="商品分類選單" inert>
+  <div class="drawer__top">
+    <button class="icon-btn drawer__close" id="btn-drawer-close" aria-label="關閉選單">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-close"/></svg>
+    </button>
+  </div>
+
+  <nav class="drawer__nav">
+    <a href="#" class="drawer__home">HOME</a>
+    <!-- 分類項目由 app.js 依 categories 產生 -->
+    <ul class="drawer__list" id="drawer-list"></ul>
+  </nav>
+</aside>
+
+
+<main>
+  <!-- ===== 主打商品橫幅 ===== -->
+  <section class="banner" aria-label="主打商品">
+    <div class="banner__inner">
+      <h2 class="banner__title">主打商品</h2>
+
+      <div class="carousel">
+        <button class="carousel__nav carousel__nav--prev" id="btn-prev" aria-label="上一個主打商品">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-prev"/></svg>
+        </button>
+
+        <!-- 主打項目由 app.js 依 featured 產生 -->
+        <ul class="carousel__track" id="carousel-track"></ul>
+
+        <button class="carousel__nav carousel__nav--next" id="btn-next" aria-label="下一個主打商品">
+          <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-next"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 商品網格 ===== -->
+  <section class="container grid-section" aria-label="商品列表">
+    <!-- 商品卡由 app.js 依 products 產生 -->
+    <ul class="grid" id="product-grid"></ul>
+  </section>
+</main>
+
+
+<!-- ===== 頁尾 ===== -->
+<footer class="footer">
+  <ul class="footer__socials">
+    <li><a class="footer__social" href="#" aria-label="Instagram" target="_blank" rel="noreferrer noopener">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-instagram"/></svg>
+    </a></li>
+    <li><a class="footer__social" href="#" aria-label="官方網站" target="_blank" rel="noreferrer noopener">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-globe"/></svg>
+    </a></li>
+  </ul>
+
+  <p class="footer__copy">© <span id="year"></span> LOGO</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
