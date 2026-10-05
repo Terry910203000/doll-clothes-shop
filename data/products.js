@@ -1,7 +1,7 @@
 // 首頁商品網格的假資料佔位
 // TODO: 換成真實商品名稱、價格與照片（圖片放 public/products/ 後填 image 欄位）
 export const products = [
-  { id: "p1", name: "Day6 巨星娃衣・白襯衫套組", price: 680, size: "30CM", image: null },
+  { id: "p1", name: "Day6 娃衣・白襯衫套組", price: 680, size: "30CM", image: null },
   { id: "p2", name: "SVT 30CM 娃衣・針織背心", price: 550, size: "30CM", image: null },
   { id: "p3", name: "16CM 娃衣・學院風外套", price: 420, size: "16CM", image: null },
   { id: "p4", name: "10CM 娃衣・毛絨連帽衣", price: 320, size: "10CM", image: null },

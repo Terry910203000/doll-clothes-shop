@@ -125,12 +125,12 @@ export function InstagramIcon(props) {
   );
 }
 
-export function GlobeIcon(props) {
+export function GmailIcon(props) {
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" {...props}>
       <g {...base}>
-        <circle cx="12" cy="12" r="8.5" />
-        <path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.4 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.4-3.4-8.5S9.7 5.9 12 3.5z" />
+        <rect x="2.5" y="5" width="19" height="14" rx="2.6" />
+        <path d="M3.4 7.2 12 13.6l8.6-6.4" />
       </g>
     </svg>
   );

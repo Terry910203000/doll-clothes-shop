@@ -1,10 +1,10 @@
-import { GlobeIcon, InstagramIcon } from "./Icons";
+import { GmailIcon, InstagramIcon } from "./Icons";
 import styles from "./SiteFooter.module.css";
 
-// TODO: 換成實際的社群連結（第二個圖示手稿上看不清楚，先放通用圖示）
+// TODO: 換成實際的帳號與信箱
 const socials = [
   { id: "instagram", label: "Instagram", href: "#", Icon: InstagramIcon },
-  { id: "site", label: "官方網站", href: "#", Icon: GlobeIcon },
+  { id: "gmail", label: "Gmail", href: "mailto:", Icon: GmailIcon },
 ];
 
 /**
@@ -14,19 +14,24 @@ export default function SiteFooter() {
   return (
     <footer className={styles.footer}>
       <ul className={styles.socials}>
-        {socials.map(({ id, label, href, Icon }) => (
-          <li key={id}>
-            <a
-              href={href}
-              className={styles.socialBtn}
-              aria-label={label}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <Icon />
-            </a>
-          </li>
-        ))}
+        {socials.map(({ id, label, href, Icon }) => {
+          // 寄信連結交給使用者的郵件軟體，不需要另開分頁
+          const isExternal = href.startsWith("http");
+
+          return (
+            <li key={id}>
+              <a
+                href={href}
+                className={styles.socialBtn}
+                aria-label={label}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noreferrer noopener" : undefined}
+              >
+                <Icon />
+              </a>
+            </li>
+          );
+        })}
       </ul>
 
       <p className={styles.copy}>© {new Date().getFullYear()} LOGO</p>
