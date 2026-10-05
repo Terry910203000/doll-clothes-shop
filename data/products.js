@@ -10,8 +10,28 @@ export const products = [
 ];
 
 // 主打商品輪播（對應手繪稿中央「主打商品」橫幅）
+// 一次顯示一張，左右箭頭或滑動切換。
+// image 填 "/featured/xxx.jpg"（檔案放 public/featured/）；留 null 時顯示 shape 佔位圖形
 export const featured = [
-  { id: "f1", name: "本月主打・Day6 應援套組", caption: "限量預購中" },
-  { id: "f2", name: "新品上架・SVT 30CM 冬季系列", caption: "NEW" },
-  { id: "f3", name: "人氣回購・基礎款娃衣", caption: "BEST" },
+  {
+    id: "f1",
+    name: "本月主打・Day6 應援套組",
+    caption: "限量預購中",
+    image: null,
+    shape: "triangle",
+  },
+  {
+    id: "f2",
+    name: "新品上架・SVT 30CM 冬季系列",
+    caption: "NEW",
+    image: null,
+    shape: "square",
+  },
+  {
+    id: "f3",
+    name: "人氣回購・基礎款娃衣",
+    caption: "BEST",
+    image: null,
+    shape: "circle",
+  },
 ];

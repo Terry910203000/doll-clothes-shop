@@ -5,18 +5,14 @@
 }
 
 .inner {
-  display: flex;
-  align-items: center;
-  gap: 32px;
   width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
-  padding: 28px var(--page-gutter);
+  padding: 26px var(--page-gutter) 22px;
 }
 
 .title {
-  flex-shrink: 0;
-  margin: 0;
+  margin: 0 0 18px;
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -25,17 +21,15 @@
 
 .carousel {
   position: relative;
-  flex: 1;
-  min-width: 0;
 }
 
+/* 一張投影片 = 一頁。scroll-snap 讓手機可以直接用手指滑 */
 .track {
   display: flex;
-  gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding-block: 4px;
+  border-radius: 10px;
 }
 
 .track::-webkit-scrollbar {
@@ -43,67 +37,78 @@
 }
 
 .slide {
-  flex: 0 0 auto;
-  width: 190px;
+  flex: 0 0 100%;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .slideLink {
+  position: relative;
   display: block;
 }
 
 .slideMedia {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
-  border-radius: 8px;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.14);
-  transition: background 0.2s ease;
 }
 
-.slideLink:hover .slideMedia {
-  background: rgba(255, 255, 255, 0.24);
+.slideMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+/* 還沒放照片時的佔位圖形 */
 .shape {
-  width: 56%;
-  height: 56%;
+  width: 120px;
+  height: 120px;
   fill: none;
   stroke: rgba(255, 255, 255, 0.85);
   stroke-width: 4;
   stroke-linejoin: round;
 }
 
+/* 文字壓在圖片上，加一層漸層讓照片再亮也看得清楚 */
 .slideText {
+  position: absolute;
+  inset: auto 0 0 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-top: 10px;
+  gap: 4px;
+  padding: 48px 28px 24px;
+  background: linear-gradient(to top, rgba(50, 28, 10, 0.72), rgba(50, 28, 10, 0));
 }
 
 .slideCaption {
   font-size: 12px;
-  letter-spacing: 0.12em;
-  opacity: 0.8;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  opacity: 0.9;
 }
 
 .slideName {
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
+/* 左右箭頭 */
 .navBtn {
   position: absolute;
-  top: 36%;
+  top: 50%;
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
   border-radius: 50%;
   color: var(--c-banner);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
   transition: background 0.2s ease;
 }
 
@@ -112,30 +117,78 @@
 }
 
 .navPrev {
-  left: -10px;
+  left: 14px;
 }
 
 .navNext {
-  right: -10px;
+  right: 14px;
+}
+
+/* 下方圓點 */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.42);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.dotActive {
+  background: #fff;
+  transform: scale(1.25);
 }
 
 @media (max-width: 820px) {
   .inner {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 18px;
-    padding-block: 22px;
+    padding-block: 20px 18px;
   }
 
   .title {
+    margin-bottom: 14px;
     font-size: 24px;
   }
 
-  .slide {
-    width: 150px;
+  .slideMedia {
+    aspect-ratio: 4 / 3;
+  }
+
+  .shape {
+    width: 88px;
+    height: 88px;
+  }
+
+  .slideText {
+    padding: 40px 18px 18px;
+  }
+
+  .slideName {
+    font-size: 18px;
   }
 
   .navBtn {
-    display: none;
+    width: 34px;
+    height: 34px;
+    margin-top: -17px;
+  }
+
+  .navPrev {
+    left: 8px;
+  }
+
+  .navNext {
+    right: 8px;
   }
 }
