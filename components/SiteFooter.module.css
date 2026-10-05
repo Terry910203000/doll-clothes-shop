@@ -1,0 +1,37 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 36px var(--page-gutter) 48px;
+  border-top: 1px solid var(--c-line);
+  color: var(--c-text);
+}
+
+.socials {
+  display: flex;
+  gap: 22px;
+}
+
+.socialBtn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.6px solid var(--c-text);
+  border-radius: 50%;
+  color: var(--c-text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.socialBtn:hover {
+  background: var(--c-text);
+  color: var(--c-page);
+}
+
+.copy {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}

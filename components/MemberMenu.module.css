@@ -1,0 +1,54 @@
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 55;
+  width: min(290px, calc(100vw - 32px));
+  padding: 10px;
+  border-radius: 10px;
+  background: var(--c-menu-blue);
+  box-shadow: 0 10px 26px rgba(99, 49, 49, 0.18);
+  transform-origin: top right;
+  transform: translateY(-6px) scale(0.97);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.panelOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  border-radius: 8px;
+  color: var(--c-text);
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  transition: background 0.18s ease;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.rowIcon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.rowLabel {
+  flex: 1;
+}
+
+.rowArrow {
+  flex-shrink: 0;
+  opacity: 0.55;
+}

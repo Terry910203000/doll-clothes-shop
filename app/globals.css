@@ -1,0 +1,92 @@
+/* ============================================================
+   設計代幣 (Design Tokens)
+   顏色全部來自手繪稿上的 RGB 標註
+   ============================================================ */
+:root {
+  /* 頂部列底色 R189 G154 B130 */
+  --c-bar: rgb(189, 154, 130);
+  /* LOGO / 頂部圖示 R147 G90 B36 */
+  --c-logo: rgb(147, 90, 36);
+  /* 主打商品橫幅 R147 G102 B35 */
+  --c-banner: rgb(147, 102, 35);
+  /* 商品文字 / 價格 / 社群圖示 R99 G49 B49 */
+  --c-text: rgb(99, 49, 49);
+
+  /* 商品卡片棋盤交錯用的兩個底色 */
+  --c-card-a: rgb(189, 154, 130);
+  --c-card-b: rgb(147, 102, 35);
+
+  /* 手稿上的側邊選單粉紅 / 會員選單淺藍 */
+  --c-menu-pink: #f7dfe8;
+  --c-menu-blue: #dce8f7;
+
+  /* 中性色 */
+  --c-page: #fdfbf8;
+  --c-line: #d8cec6;
+  --c-white: #ffffff;
+
+  /* 版面尺寸 */
+  --header-h: 64px;
+  --page-max: 1180px;
+  --page-gutter: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--c-page);
+  color: var(--c-text);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* 共用的置中容器 */
+.container {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+/* 鍵盤操作時才顯示的焦點框 */
+:focus-visible {
+  outline: 2px solid var(--c-logo);
+  outline-offset: 2px;
+}

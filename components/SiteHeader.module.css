@@ -1,0 +1,69 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--c-bar);
+  border-bottom: 1px solid rgba(99, 49, 49, 0.16);
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: var(--header-h);
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+  color: var(--c-logo);
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  /* letter-spacing 會在右側多出一格空白，往左補回來讓它真的置中 */
+  text-indent: 0.34em;
+  white-space: nowrap;
+  color: var(--c-logo);
+}
+
+.actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.iconBtn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--c-logo);
+  transition: background 0.2s ease;
+}
+
+.iconBtn:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 520px) {
+  .logo {
+    font-size: 21px;
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
+  }
+
+  .iconBtn {
+    width: 36px;
+    height: 36px;
+  }
+}

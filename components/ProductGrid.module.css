@@ -1,0 +1,29 @@
+.section {
+  padding-block: 44px 56px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px 28px;
+}
+
+/* 三欄排列時，奇偶交錯剛好形成手繪稿上的棋盤配色 */
+.cell:nth-child(odd) {
+  --card-bg: var(--c-card-b);
+}
+
+.cell:nth-child(even) {
+  --card-bg: var(--c-card-a);
+}
+
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px 18px;
+  }
+
+  .section {
+    padding-block: 32px 40px;
+  }
+}
