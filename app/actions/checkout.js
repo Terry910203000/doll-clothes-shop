@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getCart } from "@/lib/cart";
+import { sendOrderEmail } from "@/lib/email";
 import {
   PAYMENT_OPTIONS,
   SHIPPING_OPTIONS,
@@ -112,12 +113,13 @@ export async function createOrder(_prevState, form) {
   );
   const fee = shippingFee(values.shipping);
 
-  const orderNo = await prisma.$transaction(async (tx) => {
+  const created = await prisma.$transaction(async (tx) => {
     // 編號接在現有訂單之後，補零到 5 位（手稿的 00023 格式）
     const count = await tx.order.count();
     const no = String(count + 1).padStart(5, "0");
 
-    await tx.order.create({
+    const order = await tx.order.create({
+      include: { items: true },
       data: {
         orderNo: no,
         email: values.email,
@@ -151,13 +153,20 @@ export async function createOrder(_prevState, form) {
 
     await tx.cartItem.deleteMany({ where: { cartId: cart.id } });
 
-    return no;
+    return order;
   });
+
+  // 寄信失敗不該讓已經成立的訂單看起來像失敗，所以不往上丟
+  try {
+    await sendOrderEmail({ to: created.email, order: created });
+  } catch (e) {
+    console.error("[訂單通知信寄送失敗]", e);
+  }
 
   revalidatePath("/cart");
   revalidatePath("/");
 
   // TODO: 選擇 LINE PAY / 信用卡時，改導向金流商的付款頁
   // （等綠界特約商店帳號申請完成、金鑰填入 .env 後接上）
-  redirect(`/checkout/done/${orderNo}`);
+  redirect(`/checkout/done/${created.orderNo}`);
 }

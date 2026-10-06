@@ -1,52 +1,11 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { mkdir, unlink, writeFile } from "node:fs/promises";
-import path from "node:path";
-import sharp from "sharp";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
-
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
-const MAX_UPLOAD = 12 * 1024 * 1024; // 12MB，原始手機照片通常在這之內
-const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);
-
-/**
- * 存一張商品照。
- *
- * 一律用 sharp 重新編碼成 WebP：既壓掉手機原圖的龐大體積，
- * 也等於過濾掉偽裝成圖片的檔案（解不開就會丟例外）。
- */
-async function saveImage(file) {
-  if (!file || typeof file === "string" || file.size === 0) return null;
-  if (file.size > MAX_UPLOAD) throw new Error("圖片超過 12MB");
-  if (!ALLOWED.has(file.type)) throw new Error("只接受 JPG / PNG / WebP / AVIF");
-
-  const buf = Buffer.from(await file.arrayBuffer());
-  const out = await sharp(buf)
-    .rotate() // 依 EXIF 轉正
-    .resize({ width: 1400, height: 1400, fit: "inside", withoutEnlargement: true })
-    .webp({ quality: 78 })
-    .toBuffer();
-
-  await mkdir(UPLOAD_DIR, { recursive: true });
-  const name = `${randomUUID()}.webp`;
-  await writeFile(path.join(UPLOAD_DIR, name), out);
-
-  return `/uploads/${name}`;
-}
-
-/** 刪掉自己上傳的檔案；種子商品的圖在 public/products/ 下，不碰 */
-async function removeUpload(url) {
-  if (!url?.startsWith("/uploads/")) return;
-  try {
-    await unlink(path.join(process.cwd(), "public", url.replace("/uploads/", "uploads/")));
-  } catch {
-    // 檔案本來就不在就算了，不該因此讓整個操作失敗
-  }
-}
+import { deleteImage, saveImage } from "@/lib/storage";
 
 function parseSizes(form) {
   // 尺寸與庫存成對送上來：sizeName[] / sizeStock[]
@@ -184,7 +143,7 @@ export async function updateProduct(_prevState, form) {
       where: { id: { in: removeIds }, productId: id },
     });
     await prisma.productImage.deleteMany({ where: { id: { in: rows.map((r) => r.id) } } });
-    for (const row of rows) await removeUpload(row.url);
+    for (const row of rows) await deleteImage(row.url);
   }
 
   // 尺寸：沿用原本的列才能保住已經賣出的關聯，沒留下的才刪掉
@@ -246,7 +205,7 @@ export async function deleteProduct(formData) {
   if (!product) return;
 
   await prisma.product.delete({ where: { id } });
-  for (const img of product.images) await removeUpload(img.url);
+  for (const img of product.images) await deleteImage(img.url);
 
   revalidatePath("/admin/products");
   revalidatePath("/");

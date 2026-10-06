@@ -8,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { createSession, destroySession, getCurrentUser } from "@/lib/auth";
 import { mergeGuestCart } from "@/lib/cart";
 import { verifyCaptcha } from "@/lib/captcha";
+import { sendPasswordResetEmail } from "@/lib/email";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD = 8;
@@ -125,9 +126,8 @@ export async function requestPasswordReset(_prevState, form) {
       },
     });
 
-    // TODO: 接上寄信服務後改成真的寄出。
-    // 目前先印在伺服器終端機，方便開發時測試整個流程。
-    console.log(`[重設密碼] ${email} → /reset/${token}`);
+    // 還沒設定 RESEND_API_KEY 時，lib/email 會改印在終端機
+    await sendPasswordResetEmail({ to: email, token });
   }
 
   return { ok: true, sent: true };

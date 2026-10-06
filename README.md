@@ -54,9 +54,21 @@ npm run images
 | `/admin/members` | 會員列表，備註欄離開欄位即自動儲存 |
 | `/admin/stats` | 銷售趨勢折線圖、今日／本月／今年、銷量排名 |
 
-後台上傳的圖片存在 `public/uploads/`（不進版控）。
-若日後要部署到 Vercel 這類唯讀檔案系統的平台，
-得改存到物件儲存服務（例如 S3、Cloudflare R2）。
+後台上傳的圖片走 `lib/storage.js`：`.env` 有填 `R2_*` 就存 Cloudflare R2，
+沒填就存本機 `public/uploads/`（不進版控）。換儲存服務只要改 `.env`。
+
+## 外部服務
+
+兩項都是「沒設定就自動退回本機行為」，不會因為沒申請而壞掉。
+需要哪些變數與申請步驟都寫在 `.env.example` 裡。
+
+| 服務 | 沒設定時 | 設定後 |
+| --- | --- | --- |
+| Resend（寄信） | 信件內容印在終端機 | 真的寄出重設密碼信、訂單通知信 |
+| Cloudflare R2（圖片） | 存在本機 `public/uploads/` | 存到 R2，網址由 `R2_PUBLIC_URL` 組出 |
+
+設定 R2 後記得重開 dev server，`next.config.mjs` 要讀 `R2_PUBLIC_URL`
+才會允許 `next/image` 載入該網域的圖片。
 
 ## 配色
 
