@@ -3,15 +3,15 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// 商品圖存到 R2 之後網址會在別的網域上，
+// 商品圖存到雲端之後網址會在別的網域上，
 // next/image 預設只允許同站圖片，所以要把它列為可信來源。
 const remotePatterns = [];
-if (process.env.R2_PUBLIC_URL) {
+if (process.env.S3_PUBLIC_URL) {
   try {
-    const { protocol, hostname } = new URL(process.env.R2_PUBLIC_URL);
+    const { protocol, hostname } = new URL(process.env.S3_PUBLIC_URL);
     remotePatterns.push({ protocol: protocol.replace(":", ""), hostname });
   } catch {
-    console.warn("R2_PUBLIC_URL 不是合法網址，已略過 next/image 設定");
+    console.warn("S3_PUBLIC_URL 不是合法網址，已略過 next/image 設定");
   }
 }
 

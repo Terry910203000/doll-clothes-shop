@@ -9,6 +9,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // 資料庫遷移必須走直連；DATABASE_URL 在 Vercel 上是連線池網址，
+    // 連線池不支援建立資料表所需的 session 層級操作。
+    url: process.env["DIRECT_URL"] || process.env["DATABASE_URL"],
   },
 });
