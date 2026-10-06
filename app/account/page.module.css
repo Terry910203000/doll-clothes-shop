@@ -1,0 +1,193 @@
+.page {
+  padding-block: 40px 72px;
+  color: var(--c-text);
+}
+
+.heading {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+}
+
+.section {
+  padding-block: 28px;
+  border-top: 1px solid var(--c-line);
+}
+
+.section:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.sectionTitle {
+  margin: 0 0 20px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* 購物狀態三段 */
+.status {
+  margin-bottom: 26px;
+  padding-left: 18px;
+  border-left: 3px solid var(--c-line);
+}
+
+.status:last-child {
+  margin-bottom: 0;
+}
+
+.statusTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.count {
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding-inline: 7px;
+  border-radius: 999px;
+  background: var(--c-bar);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.empty {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.65;
+}
+
+.simpleList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.simpleList li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.meta {
+  margin-left: 10px;
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.inlineLink {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* 訂單卡 */
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.order {
+  padding: 16px 18px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.orderHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.orderNo {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.orderDate {
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+.orderFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--c-line);
+  font-size: 14px;
+}
+
+/* 收藏清單：橫向捲動的卡片列（手稿第 6 頁下半） */
+.favorites {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+.favorites > li {
+  flex: 0 0 auto;
+  width: 180px;
+}
+
+.favCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.favImage {
+  object-fit: cover;
+}
+
+.favName {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.favPrice {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 22px;
+  }
+
+  .favorites > li {
+    width: 148px;
+  }
+}

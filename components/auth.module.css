@@ -1,0 +1,186 @@
+/* 會員登入 / 註冊 / 重設密碼 共用樣式（手稿第 7 頁） */
+
+.page {
+  max-width: 440px;
+  margin-inline: auto;
+  padding: 56px var(--page-gutter) 72px;
+  color: var(--c-text);
+}
+
+.heading {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input {
+  width: 100%;
+  height: 46px;
+  padding-inline: 14px;
+  border: 1px solid var(--c-line);
+  border-radius: 4px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+}
+
+.input::placeholder {
+  color: rgba(99, 49, 49, 0.45);
+}
+
+.input:focus-visible {
+  border-color: var(--c-logo);
+}
+
+.input[aria-invalid="true"] {
+  border-color: #c0392b;
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: #c0392b;
+}
+
+.errorBox {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 4px;
+  background: #f6e6e6;
+  font-size: 14px;
+  color: #a5342a;
+}
+
+.okBox {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 4px;
+  background: #eef3e8;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 認證碼：輸入框右側嵌入圖片與重新產生按鈕 */
+.captchaRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.captchaRow .input {
+  padding-right: 158px;
+}
+
+.captchaBox {
+  position: absolute;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.captchaImage {
+  display: grid;
+  place-items: center;
+  height: 34px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.captchaImage svg {
+  display: block;
+}
+
+.captchaRefresh {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--c-text);
+  opacity: 0.65;
+  transition: opacity 0.18s ease, background 0.18s ease;
+}
+
+.captchaRefresh:hover:not(:disabled) {
+  opacity: 1;
+  background: #f3ece7;
+}
+
+.captchaRefresh:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* 主要按鈕 */
+.submit {
+  width: 100%;
+  height: 48px;
+  margin-top: 6px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  transition: filter 0.18s ease;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+/* 登入是黑底，註冊是桃紅底（依手稿） */
+.submitDark {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.submitPink {
+  background: #a8366a;
+  color: #fff;
+}
+
+/* 底部連結列 */
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: 0.75;
+}
+
+.note a {
+  text-decoration: underline;
+}

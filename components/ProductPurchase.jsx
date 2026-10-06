@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { addToCart } from "@/app/actions/cart";
+import { toggleFavorite } from "@/app/actions/favorite";
 import { HeartIcon } from "./Icons";
 import styles from "./ProductPurchase.module.css";
 
@@ -11,12 +13,14 @@ const twd = new Intl.NumberFormat("zh-TW");
  * 商品詳情頁右側的購買區（手稿第 3 頁）
  * 尺寸 → 數量 → 收藏 / 加入購物車 → 分享
  */
-export default function ProductPurchase({ product }) {
+export default function ProductPurchase({ product, favorited = false }) {
   const inStock = product.variants.filter((v) => v.stock > 0);
   const [variantId, setVariantId] = useState(inStock[0]?.id ?? null);
   const [qty, setQty] = useState(1);
   const [result, setResult] = useState(null);
   const [pending, startTransition] = useTransition();
+  const [isFav, setIsFav] = useState(favorited);
+  const router = useRouter();
 
   const selected = product.variants.find((v) => v.id === variantId);
   const max = selected?.stock ?? 0;
@@ -112,9 +116,25 @@ export default function ProductPurchase({ product }) {
 
       {/* 動作 */}
       <div className={styles.actions}>
-        <button type="button" className={styles.fav} aria-label="加入收藏清單">
+        <button
+          type="button"
+          className={`${styles.fav} ${isFav ? styles.favOn : ""}`}
+          aria-pressed={isFav}
+          aria-label={isFav ? "從收藏清單移除" : "加入收藏清單"}
+          onClick={() =>
+            startTransition(async () => {
+              const r = await toggleFavorite({ productId: product.id });
+              // 未登入就先去登入，登入後回到這一頁
+              if (r.needLogin) {
+                router.push(`/login?next=/product/${product.slug}`);
+                return;
+              }
+              setIsFav(r.favorited);
+            })
+          }
+        >
           <HeartIcon />
-          收藏
+          {isFav ? "已收藏" : "收藏"}
         </button>
 
         <button

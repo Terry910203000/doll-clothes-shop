@@ -3,6 +3,7 @@ import ProductGallery from "@/components/ProductGallery";
 import ProductPurchase from "@/components/ProductPurchase";
 import ProductCard from "@/components/ProductCard";
 import { getProductBySlug, getRelatedProducts } from "@/lib/queries";
+import { isFavorited } from "@/app/actions/favorite";
 import styles from "./page.module.css";
 
 export async function generateMetadata({ params }) {
@@ -22,17 +23,20 @@ export default async function ProductPage({ params }) {
 
   if (!product) notFound();
 
-  const related = await getRelatedProducts({
-    categorySlug: product.category.slug,
-    excludeSlug: product.slug,
-  });
+  const [related, favorited] = await Promise.all([
+    getRelatedProducts({
+      categorySlug: product.category.slug,
+      excludeSlug: product.slug,
+    }),
+    isFavorited(product.id),
+  ]);
 
   return (
     <article>
       {/* 上半部：相簿 + 購買區 */}
       <section className={`container ${styles.top}`}>
         <ProductGallery images={product.images} name={product.name} />
-        <ProductPurchase product={product} />
+        <ProductPurchase product={product} favorited={favorited} />
       </section>
 
       {/* 下半部：商品詳情 + 娃尺寸 */}

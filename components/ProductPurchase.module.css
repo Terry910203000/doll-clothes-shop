@@ -160,6 +160,11 @@
   color: var(--c-page);
 }
 
+.favOn {
+  background: var(--c-text);
+  color: var(--c-page);
+}
+
 .addToCart {
   flex: 1;
   padding: 13px 24px;

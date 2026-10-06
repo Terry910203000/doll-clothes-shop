@@ -25,9 +25,24 @@ model User {
   role      Role     @default(CUSTOMER)
   createdAt DateTime @default(now())
 
-  orders    Order[]
-  favorites Favorite[]
-  cart      Cart?
+  orders      Order[]
+  favorites   Favorite[]
+  cart        Cart?
+  resetTokens PasswordResetToken[]
+}
+
+// 忘記密碼用的一次性代碼。只存雜湊，寄出的原始代碼不留在資料庫
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum Role {

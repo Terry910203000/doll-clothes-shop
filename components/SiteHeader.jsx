@@ -11,7 +11,7 @@ import styles from "./SiteHeader.module.css";
  * 頂部列：漢堡選單（左）／ LOGO（中）／ 會員 + 購物車（右）
  * 底色 rgb(189,154,130)，文字與圖示 rgb(147,90,36)。
  */
-export default function SiteHeader({ categories = [] }) {
+export default function SiteHeader({ categories = [], user = null }) {
   const [sideOpen, setSideOpen] = useState(false);
   const [memberOpen, setMemberOpen] = useState(false);
   const memberBtnRef = useRef(null);
@@ -58,6 +58,7 @@ export default function SiteHeader({ categories = [] }) {
               open={memberOpen}
               onClose={closeMember}
               anchorRef={memberBtnRef}
+              user={user}
             />
           </div>
         </div>

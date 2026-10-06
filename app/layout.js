@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import { getCategories } from "@/lib/queries";
+import { getCurrentUser } from "@/lib/auth";
 import "./globals.css";
 
 export const metadata = {
@@ -14,8 +15,8 @@ export const viewport = {
 };
 
 export default async function RootLayout({ children }) {
-  // 分類選單每頁都要用，在最外層取一次就好
-  const categories = await getCategories();
+  // 分類選單與登入狀態每頁都要用，在最外層取一次就好
+  const [categories, user] = await Promise.all([getCategories(), getCurrentUser()]);
 
   return (
     <html lang="zh-Hant">
@@ -29,7 +30,7 @@ export default async function RootLayout({ children }) {
         />
       </head>
       <body>
-        <SiteHeader categories={categories} />
+        <SiteHeader categories={categories} user={user} />
         <main>{children}</main>
         <SiteFooter />
       </body>

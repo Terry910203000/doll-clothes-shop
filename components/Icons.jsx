@@ -148,3 +148,36 @@ export function TrashIcon(props) {
     </svg>
   );
 }
+
+export function RefreshIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...props}>
+      <g {...base}>
+        <path d="M20 12a8 8 0 1 1-2.6-5.9" />
+        <path d="M20 4v4.6h-4.6" />
+      </g>
+    </svg>
+  );
+}
+
+export function LogoutIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...props}>
+      <g {...base}>
+        <path d="M14 20H6.5A1.5 1.5 0 0 1 5 18.5v-13A1.5 1.5 0 0 1 6.5 4H14" />
+        <path d="M17.5 15.5 21 12l-3.5-3.5M21 12H10" />
+      </g>
+    </svg>
+  );
+}
+
+export function LoginIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" {...props}>
+      <g {...base}>
+        <path d="M10 4h7.5A1.5 1.5 0 0 1 19 5.5v13a1.5 1.5 0 0 1-1.5 1.5H10" />
+        <path d="M6.5 15.5 3 12l3.5-3.5M3 12h11" />
+      </g>
+    </svg>
+  );
+}

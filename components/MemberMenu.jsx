@@ -1,21 +1,26 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { memberMenu } from "@/data/memberMenu";
-import { HeartIcon, ReceiptIcon, UserIcon, ChevronRightIcon } from "./Icons";
+import Link from "next/link";
+import { logout } from "@/app/actions/auth";
+import {
+  ChevronRightIcon,
+  HeartIcon,
+  LoginIcon,
+  LogoutIcon,
+  ReceiptIcon,
+  UserIcon,
+} from "./Icons";
 import styles from "./MemberMenu.module.css";
 
-const iconMap = {
-  heart: HeartIcon,
-  user: UserIcon,
-  receipt: ReceiptIcon,
-};
+// 已登入時顯示的項目（手稿第 2 頁的淺藍色選單）
+const memberLinks = [
+  { id: "wishlist", label: "收藏清單", href: "/account#favorites", Icon: HeartIcon },
+  { id: "profile", label: "個人資料", href: "/account", Icon: UserIcon },
+  { id: "orders", label: "購買記錄", href: "/account#orders", Icon: ReceiptIcon },
+];
 
-/**
- * 會員下拉選單（手繪稿的淺藍色區塊）
- * 由頂部列的人物圖示觸發，收藏清單 / 個人資料 / 購買記錄。
- */
-export default function MemberMenu({ open, onClose, anchorRef }) {
+export default function MemberMenu({ open, onClose, anchorRef, user }) {
   const panelRef = useRef(null);
 
   useEffect(() => {
@@ -49,20 +54,70 @@ export default function MemberMenu({ open, onClose, anchorRef }) {
       aria-hidden={!open}
       inert={!open}
     >
-      <ul>
-        {memberMenu.map((item) => {
-          const Icon = iconMap[item.icon];
-          return (
-            <li key={item.id}>
-              <a href={item.href} className={styles.row} onClick={onClose}>
-                <span className={styles.rowIcon}>{Icon ? <Icon /> : null}</span>
-                <span className={styles.rowLabel}>{item.label}</span>
-                <ChevronRightIcon className={styles.rowArrow} />
-              </a>
+      {user ? (
+        <>
+          <p className={styles.who}>{user.name || user.email}</p>
+
+          <ul>
+            {memberLinks.map(({ id, label, href, Icon }) => (
+              <li key={id}>
+                <Link href={href} className={styles.row} onClick={onClose}>
+                  <span className={styles.rowIcon}>
+                    <Icon />
+                  </span>
+                  <span className={styles.rowLabel}>{label}</span>
+                  <ChevronRightIcon className={styles.rowArrow} />
+                </Link>
+              </li>
+            ))}
+
+            {user.role === "ADMIN" ? (
+              <li>
+                <Link href="/admin" className={styles.row} onClick={onClose}>
+                  <span className={styles.rowIcon}>
+                    <ReceiptIcon />
+                  </span>
+                  <span className={styles.rowLabel}>後台管理</span>
+                  <ChevronRightIcon className={styles.rowArrow} />
+                </Link>
+              </li>
+            ) : null}
+
+            <li>
+              {/* 登出會改變伺服器狀態，用表單送出而非連結 */}
+              <form action={logout}>
+                <button type="submit" className={styles.row} onClick={onClose}>
+                  <span className={styles.rowIcon}>
+                    <LogoutIcon />
+                  </span>
+                  <span className={styles.rowLabel}>登出</span>
+                </button>
+              </form>
             </li>
-          );
-        })}
-      </ul>
+          </ul>
+        </>
+      ) : (
+        <ul>
+          <li>
+            <Link href="/login" className={styles.row} onClick={onClose}>
+              <span className={styles.rowIcon}>
+                <LoginIcon />
+              </span>
+              <span className={styles.rowLabel}>會員登入</span>
+              <ChevronRightIcon className={styles.rowArrow} />
+            </Link>
+          </li>
+          <li>
+            <Link href="/register" className={styles.row} onClick={onClose}>
+              <span className={styles.rowIcon}>
+                <UserIcon />
+              </span>
+              <span className={styles.rowLabel}>會員註冊</span>
+              <ChevronRightIcon className={styles.rowArrow} />
+            </Link>
+          </li>
+        </ul>
+      )}
     </div>
   );
 }

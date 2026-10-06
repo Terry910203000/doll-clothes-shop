@@ -52,3 +52,25 @@
   flex-shrink: 0;
   opacity: 0.55;
 }
+
+/* 已登入時顯示的帳號 */
+.who {
+  margin: 0 0 6px;
+  padding: 8px 12px 12px;
+  border-bottom: 1px solid rgba(99, 49, 49, 0.14);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-text);
+  opacity: 0.75;
+  overflow-wrap: anywhere;
+}
+
+/* 登出是表單按鈕，補上和連結一致的寬度 */
+.panel form {
+  display: block;
+}
+
+.panel button.row {
+  width: 100%;
+  text-align: left;
+}

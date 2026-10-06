@@ -17,6 +17,29 @@ npm run dev
 
 開啟 http://localhost:3000
 
+## 資料庫
+
+```bash
+npx prisma migrate dev --name <說明>   # 改完 prisma/schema.prisma 後執行
+npm run db:seed                        # 重建分類與商品（會員與訂單保留）
+npm run db:studio                      # 用瀏覽器檢視資料
+```
+
+> **改過 schema 之後要重開 dev server。**
+> Next.js 會把產生出來的 Prisma Client 快取在記憶體裡，
+> 不重開會出現「Cannot read properties of undefined」這類錯誤。
+
+帳號密碼、資料庫位置等設定放在 `.env`（不進版控），
+需要哪些變數請看 `.env.example`。
+
+## 商品照片
+
+原始照片放在 `衣服照片/`（不進版控），執行下列指令壓成網頁用的 WebP：
+
+```bash
+npm run images
+```
+
 ## 配色
 
 全部定義在 `app/globals.css` 的 `:root`，改這裡就會全站同步。
