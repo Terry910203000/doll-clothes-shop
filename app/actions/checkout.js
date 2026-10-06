@@ -7,11 +7,12 @@ import { getCart } from "@/lib/cart";
 import { sendOrderEmail } from "@/lib/email";
 import { clearSelectedStore, getSelectedStore } from "@/lib/cvs";
 import {
-  PAYMENT_OPTIONS,
   SHIPPING_OPTIONS,
   SOURCE_OPTIONS,
+  availablePayments,
   shippingFee,
 } from "@/lib/shipping";
+import { ecpayConfig } from "@/lib/ecpay";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -37,7 +38,8 @@ function validate(form) {
   if (!SHIPPING_OPTIONS.some((o) => o.value === shipping)) {
     errors.shipping = "請選擇配送方式";
   }
-  if (!PAYMENT_OPTIONS.some((o) => o.value === payment)) {
+  // 前端藏起來不算數，後端一樣要擋，否則可以直接送出被停用的付款方式
+  if (!availablePayments(ecpayConfig().live).some((o) => o.value === payment)) {
     errors.payment = "請選擇支付方式";
   }
 

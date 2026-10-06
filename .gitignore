@@ -44,3 +44,6 @@ yarn-error.log*
 
 # 後台上傳的商品照片（各環境各自產生）
 /public/uploads/
+
+# 給 Vercel 貼上用的環境變數清單（含密碼，不進版控）
+/vercel-env.txt

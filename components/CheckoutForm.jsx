@@ -2,12 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { createOrder } from "@/app/actions/checkout";
-import {
-  PAYMENT_OPTIONS,
-  POLICIES,
-  SHIPPING_OPTIONS,
-  SOURCE_OPTIONS,
-} from "@/lib/shipping";
+import { POLICIES, SHIPPING_OPTIONS, SOURCE_OPTIONS } from "@/lib/shipping";
 import CvsPicker from "./CvsPicker";
 import styles from "./CheckoutForm.module.css";
 
@@ -17,7 +12,7 @@ const twd = new Intl.NumberFormat("zh-TW");
  * 結帳表單（手稿第 5 頁）
  * 聯絡資料 → 支付方式 → 政策確認 → 留言 → 付款
  */
-export default function CheckoutForm({ subtotal, cvsStore = null }) {
+export default function CheckoutForm({ subtotal, cvsStore = null, payments = [] }) {
   // 所有欄位都是非受控（defaultValue / defaultChecked）：
   // React 在 Server Action 送出後會重設表單，受控欄位會因為 state 沒變
   // 而不被寫回 DOM，造成畫面顯示有選、送出卻是空的。
@@ -112,7 +107,7 @@ export default function CheckoutForm({ subtotal, cvsStore = null }) {
       <section className={styles.section}>
         <h2 className={styles.legend}>支付方式</h2>
         <fieldset className={styles.choices}>
-          {PAYMENT_OPTIONS.map((o) => (
+          {payments.map((o) => (
             <label key={o.value} className={styles.choiceLine}>
               <input
                 type="radio"

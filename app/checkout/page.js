@@ -2,6 +2,8 @@ import Link from "next/link";
 import CheckoutForm from "@/components/CheckoutForm";
 import { getCartWithItems } from "@/lib/cart";
 import { getSelectedStore } from "@/lib/cvs";
+import { availablePayments } from "@/lib/shipping";
+import { ecpayConfig } from "@/lib/ecpay";
 import styles from "./page.module.css";
 
 export const metadata = { title: "結帳｜LOGO" };
@@ -14,6 +16,9 @@ export default async function CheckoutPage() {
     getCartWithItems(),
     getSelectedStore(),
   ]);
+
+  // 綠界金鑰還沒填時，線上付款只會走測試環境收不到錢，所以不開放
+  const payments = availablePayments(ecpayConfig().live);
 
   if (items.length === 0) {
     return (
@@ -34,7 +39,7 @@ export default async function CheckoutPage() {
       <h1 className={styles.heading}>結帳</h1>
 
       <div className={styles.layout}>
-        <CheckoutForm subtotal={subtotal} cvsStore={cvsStore} />
+        <CheckoutForm subtotal={subtotal} cvsStore={cvsStore} payments={payments} />
 
         <aside className={styles.summary}>
           <h2 className={styles.summaryTitle}>訂單內容</h2>
