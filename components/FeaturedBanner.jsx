@@ -1,29 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { featured } from "@/data/products";
+import Image from "next/image";
+import Link from "next/link";
 import { ArrowLeftIcon, ArrowRightIcon } from "./Icons";
 import styles from "./FeaturedBanner.module.css";
-
-// 還沒放照片時，用手繪稿上的圖形當佔位
-function Shape({ kind }) {
-  return (
-    <svg viewBox="0 0 100 100" className={styles.shape} aria-hidden="true">
-      {kind === "triangle" && <polygon points="50,14 88,86 12,86" />}
-      {kind === "square" && <rect x="16" y="16" width="68" height="68" />}
-      {(kind === "circle" || !kind) && <circle cx="50" cy="50" r="34" />}
-    </svg>
-  );
-}
 
 /**
  * 主打商品橫幅（手繪稿中央的區塊）
  * 一次只顯示一張，左右箭頭、下方圓點、手機直接滑動都可以換頁。
  */
-export default function FeaturedBanner() {
+export default function FeaturedBanner({ items = [] }) {
   const trackRef = useRef(null);
   const [index, setIndex] = useState(0);
-  const total = featured.length;
+  const total = items.length;
 
   // 用手指滑動時同步圓點（按箭頭／圓點的情況由 goTo 直接更新）
   useEffect(() => {
@@ -59,6 +49,9 @@ export default function FeaturedBanner() {
     [total],
   );
 
+  // 後台還沒把任何商品設為主打時，整個橫幅就不顯示
+  if (total === 0) return null;
+
   return (
     <section className={styles.banner} aria-label="主打商品" aria-roledescription="輪播">
       <div className={styles.inner}>
@@ -66,29 +59,37 @@ export default function FeaturedBanner() {
 
         <div className={styles.carousel}>
           <ul className={styles.track} ref={trackRef}>
-            {featured.map((item, i) => (
-              <li
-                key={item.id}
-                className={styles.slide}
-                aria-roledescription="投影片"
-                aria-label={`${i + 1} / ${total}`}
-              >
-                <a href={`/product/${item.id}`} className={styles.slideLink}>
-                  <div className={styles.slideMedia}>
-                    {item.image ? (
-                      <img src={item.image} alt={item.name} />
-                    ) : (
-                      <Shape kind={item.shape} />
-                    )}
-                  </div>
+            {items.map((item, i) => {
+              const cover = item.images?.[0];
+              return (
+                <li
+                  key={item.id}
+                  className={styles.slide}
+                  aria-roledescription="投影片"
+                  aria-label={`${i + 1} / ${total}`}
+                >
+                  <Link href={`/product/${item.slug}`} className={styles.slideLink}>
+                    <div className={styles.slideMedia}>
+                      {cover ? (
+                        <Image
+                          src={cover.url}
+                          alt={cover.alt ?? item.name}
+                          fill
+                          sizes="(max-width: 1180px) 100vw, 1180px"
+                          className={styles.slideImage}
+                          priority={i === 0}
+                        />
+                      ) : null}
+                    </div>
 
-                  <div className={styles.slideText}>
-                    <span className={styles.slideCaption}>{item.caption}</span>
-                    <span className={styles.slideName}>{item.name}</span>
-                  </div>
-                </a>
-              </li>
-            ))}
+                    <div className={styles.slideText}>
+                      <span className={styles.slideCaption}>{item.featuredCaption}</span>
+                      <span className={styles.slideName}>{item.name}</span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <button
@@ -109,7 +110,7 @@ export default function FeaturedBanner() {
         </div>
 
         <ul className={styles.dots}>
-          {featured.map((item, i) => (
+          {items.map((item, i) => (
             <li key={item.id}>
               <button
                 className={`${styles.dot} ${i === index ? styles.dotActive : ""}`}

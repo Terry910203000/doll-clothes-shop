@@ -1,0 +1,96 @@
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: 48px;
+  padding-block: 40px 56px;
+}
+
+/* 商品詳情區 */
+.detailWrap {
+  border-block: 1px solid var(--c-line);
+  background: #fbf7f3;
+  padding-block: 40px 48px;
+}
+
+.detailHeading {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-text);
+}
+
+.detailBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  gap: 36px;
+  align-items: start;
+}
+
+.detailText p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--c-text);
+}
+
+.sizeChart {
+  padding: 20px 22px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.sizeChartTitle {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--c-text);
+}
+
+.sizeChart p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--c-text);
+}
+
+/* 其它搭配 */
+.related {
+  padding-block: 44px 60px;
+}
+
+.relatedHeading {
+  margin: 0 0 24px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-text);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-block: 28px 40px;
+  }
+
+  .detailBody {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}

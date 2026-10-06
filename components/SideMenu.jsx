@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { categories } from "@/data/categories";
+import Link from "next/link";
 import { CloseIcon } from "./Icons";
 import styles from "./SideMenu.module.css";
 
 /**
  * 左側分類抽屜選單（手繪稿的粉紅色區塊）
- * 第一項 HOME 為標題樣式，其餘為分類連結。
+ * HOME 固定在最上方，其餘分類由資料庫帶入。
  */
-export default function SideMenu({ open, onClose }) {
+export default function SideMenu({ open, onClose, categories = [] }) {
   const panelRef = useRef(null);
 
   // 開啟時鎖住背景捲動，並支援 Esc 關閉
@@ -31,8 +31,6 @@ export default function SideMenu({ open, onClose }) {
       document.body.style.overflow = prevOverflow;
     };
   }, [open, onClose]);
-
-  const [home, ...rest] = categories;
 
   return (
     <>
@@ -57,16 +55,20 @@ export default function SideMenu({ open, onClose }) {
         </div>
 
         <nav className={styles.nav}>
-          <a href={home.href} className={styles.home} onClick={onClose}>
-            {home.label}
-          </a>
+          <Link href="/" className={styles.home} onClick={onClose}>
+            HOME
+          </Link>
 
           <ul className={styles.list}>
-            {rest.map((item) => (
+            {categories.map((item) => (
               <li key={item.id}>
-                <a href={item.href} className={styles.link} onClick={onClose}>
-                  {item.label}
-                </a>
+                <Link
+                  href={`/category/${item.slug}`}
+                  className={styles.link}
+                  onClick={onClose}
+                >
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>

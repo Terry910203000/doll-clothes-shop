@@ -1,0 +1,58 @@
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.main {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  color: var(--c-text);
+  opacity: 0.6;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.thumbs {
+  display: flex;
+  gap: 10px;
+}
+
+.thumb {
+  position: relative;
+  display: block;
+  width: 84px;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  transition: border-color 0.18s ease;
+}
+
+.thumb:hover {
+  border-color: var(--c-logo);
+}
+
+.thumbActive {
+  border-color: var(--c-text);
+  border-width: 2px;
+}
+
+@media (max-width: 640px) {
+  .thumb {
+    width: 68px;
+  }
+}

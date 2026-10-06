@@ -32,3 +32,12 @@ yarn-error.log*
 # editor
 .vscode/
 .idea/
+
+/generated/prisma
+
+# 本機 SQLite 資料庫（每個人各自產生，不進版控）
+/dev.db
+/dev.db-journal
+
+# 原始商品照（壓縮後的版本在 public/products/）
+/衣服照片/

@@ -135,3 +135,16 @@ export function GmailIcon(props) {
     </svg>
   );
 }
+
+export function TrashIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" {...props}>
+      <g {...base}>
+        <path d="M4 7h16" />
+        <path d="M9.5 7V5.2A1.2 1.2 0 0 1 10.7 4h2.6a1.2 1.2 0 0 1 1.2 1.2V7" />
+        <path d="M6.4 7l.9 12a1.6 1.6 0 0 0 1.6 1.5h6.2a1.6 1.6 0 0 0 1.6-1.5l.9-12" />
+        <path d="M10.4 11v6M13.6 11v6" />
+      </g>
+    </svg>
+  );
+}

@@ -48,27 +48,18 @@
 }
 
 .slideMedia {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 7;
+  /* next/image fill 需要一個定位過的父層 */
+  position: relative;
+  /* 商品照是 3:4 直式，用固定高度而非寬螢幕比例，
+     否則 cover 會把整張裁到只剩娃娃的頭、看不見衣服 */
+  height: 420px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.12);
 }
 
-.slideMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 還沒放照片時的佔位圖形 */
-.shape {
-  width: 120px;
-  height: 120px;
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.85);
-  stroke-width: 4;
-  stroke-linejoin: round;
+/* 完整顯示整張照片，不裁切 */
+.slideImage {
+  object-fit: contain;
 }
 
 /* 文字壓在圖片上，加一層漸層讓照片再亮也看得清楚 */
@@ -162,12 +153,7 @@
   }
 
   .slideMedia {
-    aspect-ratio: 4 / 3;
-  }
-
-  .shape {
-    width: 88px;
-    height: 88px;
+    height: 320px;
   }
 
   .slideText {

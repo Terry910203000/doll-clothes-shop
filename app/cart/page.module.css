@@ -1,0 +1,103 @@
+.page {
+  padding-block: 40px 64px;
+  color: var(--c-text);
+}
+
+.heading {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+}
+
+.list {
+  border-top: 1px solid var(--c-line);
+}
+
+/* 總金額列 */
+.summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 4px;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.summaryLabel {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.summaryValue {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.checkoutRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.checkout {
+  display: inline-block;
+  padding: 15px 56px;
+  border-radius: 6px;
+  background: var(--c-logo);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  transition: filter 0.18s ease;
+}
+
+.checkout:hover {
+  filter: brightness(1.08);
+}
+
+/* 空購物車 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-block: 70px;
+}
+
+.empty p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.keepShopping {
+  padding: 12px 30px;
+  border: 1px solid var(--c-text);
+  border-radius: 6px;
+  font-size: 15px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.keepShopping:hover {
+  background: var(--c-text);
+  color: var(--c-page);
+}
+
+@media (max-width: 640px) {
+  .heading {
+    font-size: 23px;
+  }
+
+  .checkoutRow {
+    justify-content: stretch;
+  }
+
+  .checkout {
+    flex: 1;
+    text-align: center;
+    padding-inline: 0;
+  }
+}

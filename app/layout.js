@@ -1,3 +1,6 @@
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import { getCategories } from "@/lib/queries";
 import "./globals.css";
 
 export const metadata = {
@@ -10,7 +13,10 @@ export const viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  // 分類選單每頁都要用，在最外層取一次就好
+  const categories = await getCategories();
+
   return (
     <html lang="zh-Hant">
       <head>
@@ -22,7 +28,11 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <SiteHeader categories={categories} />
+        <main>{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }

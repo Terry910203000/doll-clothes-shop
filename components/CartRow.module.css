@@ -1,0 +1,140 @@
+.row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--c-line);
+}
+
+/* 送出請求時整列淡化，避免重複點擊 */
+.pending {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  color: var(--c-text);
+}
+
+.name {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.size {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.label {
+  display: inline-block;
+  width: 44px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.qtyRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.stepper button {
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  transition: background 0.18s ease;
+}
+
+.stepper button:hover:not(:disabled) {
+  background: #f3ece7;
+}
+
+.stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.qty {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 34px;
+  border-inline: 1px solid var(--c-line);
+  font-size: 15px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+}
+
+.priceValue {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.remove {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  color: var(--c-text);
+  opacity: 0.6;
+  transition: opacity 0.18s ease, background 0.18s ease;
+}
+
+.remove:hover:not(:disabled) {
+  opacity: 1;
+  background: #f3ece7;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 104px minmax(0, 1fr) auto;
+    gap: 14px;
+    padding: 16px 0;
+  }
+
+  .name {
+    font-size: 15px;
+  }
+}
