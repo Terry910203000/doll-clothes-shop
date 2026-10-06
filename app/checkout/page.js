@@ -1,6 +1,7 @@
 import Link from "next/link";
 import CheckoutForm from "@/components/CheckoutForm";
 import { getCartWithItems } from "@/lib/cart";
+import { getSelectedStore } from "@/lib/cvs";
 import styles from "./page.module.css";
 
 export const metadata = { title: "結帳｜LOGO" };
@@ -9,7 +10,10 @@ export const dynamic = "force-dynamic";
 const twd = new Intl.NumberFormat("zh-TW");
 
 export default async function CheckoutPage() {
-  const { items, subtotal } = await getCartWithItems();
+  const [{ items, subtotal }, cvsStore] = await Promise.all([
+    getCartWithItems(),
+    getSelectedStore(),
+  ]);
 
   if (items.length === 0) {
     return (
@@ -30,7 +34,7 @@ export default async function CheckoutPage() {
       <h1 className={styles.heading}>結帳</h1>
 
       <div className={styles.layout}>
-        <CheckoutForm subtotal={subtotal} />
+        <CheckoutForm subtotal={subtotal} cvsStore={cvsStore} />
 
         <aside className={styles.summary}>
           <h2 className={styles.summaryTitle}>訂單內容</h2>

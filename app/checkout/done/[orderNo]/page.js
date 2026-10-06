@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { paymentLabel, shippingLabel } from "@/lib/shipping";
+import { cvsLabel } from "@/lib/cvs";
 import styles from "./page.module.css";
 
 export const metadata = { title: "訂單完成｜LOGO" };
@@ -50,6 +51,19 @@ export default async function OrderDonePage({ params, searchParams }) {
           <dt>支付方式</dt>
           <dd>{paymentLabel(order.payment)}</dd>
         </div>
+        {order.cvsStoreName ? (
+          <div>
+            <dt>取貨門市</dt>
+            <dd>
+              {cvsLabel(order.cvsSubType)}　{order.cvsStoreName}
+              <br />
+              <span className={styles.meta}>
+                店號 {order.cvsStoreId}
+                {order.cvsAddress ? `　${order.cvsAddress}` : ""}
+              </span>
+            </dd>
+          </div>
+        ) : null}
       </dl>
 
       <ul className={styles.items}>

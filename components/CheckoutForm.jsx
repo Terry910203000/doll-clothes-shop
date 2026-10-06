@@ -8,6 +8,7 @@ import {
   SHIPPING_OPTIONS,
   SOURCE_OPTIONS,
 } from "@/lib/shipping";
+import CvsPicker from "./CvsPicker";
 import styles from "./CheckoutForm.module.css";
 
 const twd = new Intl.NumberFormat("zh-TW");
@@ -16,7 +17,7 @@ const twd = new Intl.NumberFormat("zh-TW");
  * 結帳表單（手稿第 5 頁）
  * 聯絡資料 → 支付方式 → 政策確認 → 留言 → 付款
  */
-export default function CheckoutForm({ subtotal }) {
+export default function CheckoutForm({ subtotal, cvsStore = null }) {
   // 所有欄位都是非受控（defaultValue / defaultChecked）：
   // React 在 Server Action 送出後會重設表單，受控欄位會因為 state 沒變
   // 而不被寫回 DOM，造成畫面顯示有選、送出卻是空的。
@@ -25,7 +26,11 @@ export default function CheckoutForm({ subtotal }) {
   const errors = state?.errors ?? {};
   const values = state?.values ?? {};
 
-  const [shipping, setShipping] = useState(values.shipping ?? "");
+  // 從綠界門市地圖回來時整頁會重新載入，
+  // 既然已經選了門市，配送方式就該自動回到超商取貨
+  const [shipping, setShipping] = useState(
+    values.shipping || (cvsStore ? "CVS_PICKUP" : ""),
+  );
   const [source, setSource] = useState(values.source ?? "");
 
   const fee = SHIPPING_OPTIONS.find((o) => o.value === shipping)?.fee ?? 0;
@@ -83,7 +88,11 @@ export default function CheckoutForm({ subtotal }) {
                 type="radio"
                 name="shipping"
                 value={o.value}
-                defaultChecked={values.shipping === o.value}
+                defaultChecked={
+                  values.shipping
+                    ? values.shipping === o.value
+                    : Boolean(cvsStore) && o.value === "CVS_PICKUP"
+                }
                 onChange={() => setShipping(o.value)}
               />
               <span>{o.label}</span>
@@ -91,6 +100,11 @@ export default function CheckoutForm({ subtotal }) {
             </label>
           ))}
           {errors.shipping ? <p className={styles.error}>{errors.shipping}</p> : null}
+
+          {/* 選了超商取貨才要挑門市 */}
+          {shipping === "CVS_PICKUP" ? (
+            <CvsPicker store={cvsStore} error={errors.cvsStore} />
+          ) : null}
         </fieldset>
       </section>
 

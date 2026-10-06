@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { updateOrderStatus } from "@/app/actions/admin-orders";
 import { shippingLabel } from "@/lib/shipping";
+import { cvsLabel } from "@/lib/cvs";
 import StatusSelect from "@/components/StatusSelect";
 import styles from "@/components/admin.module.css";
 
@@ -76,7 +77,17 @@ export default async function AdminOrdersPage() {
                     </td>
                     <td>{qty}</td>
                     <td>NT$ {twd.format(o.total)}</td>
-                    <td>{shippingLabel(o.shipping)}</td>
+                    <td className={styles.wrapCell}>
+                      {shippingLabel(o.shipping)}
+                      {o.cvsStoreName ? (
+                        <>
+                          <br />
+                          <span className={styles.hint}>
+                            {cvsLabel(o.cvsSubType)} {o.cvsStoreName}（{o.cvsStoreId}）
+                          </span>
+                        </>
+                      ) : null}
+                    </td>
                     <td>
                       <StatusSelect
                         action={updateOrderStatus}

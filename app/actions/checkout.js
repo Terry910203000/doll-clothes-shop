@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getCart } from "@/lib/cart";
 import { sendOrderEmail } from "@/lib/email";
+import { clearSelectedStore, getSelectedStore } from "@/lib/cvs";
 import {
   PAYMENT_OPTIONS,
   SHIPPING_OPTIONS,
@@ -81,6 +82,19 @@ export async function createOrder(_prevState, form) {
     return { ok: false, errors, values };
   }
 
+  // 超商取貨一定要先選門市，否則貨無處可送
+  let store = null;
+  if (values.shipping === "CVS_PICKUP") {
+    store = await getSelectedStore();
+    if (!store) {
+      return {
+        ok: false,
+        errors: { cvsStore: "請先選擇取貨門市" },
+        values,
+      };
+    }
+  }
+
   const cart = await getCart();
   if (!cart) return { ok: false, errors: { cart: "購物車是空的" }, values };
 
@@ -129,6 +143,11 @@ export async function createOrder(_prevState, form) {
         payment: values.payment,
         source: values.source || null,
         sourceOther: values.source === "OTHER" ? values.sourceOther : null,
+        cvsSubType: store?.subType ?? null,
+        cvsStoreId: store?.storeId ?? null,
+        cvsStoreName: store?.storeName ?? null,
+        cvsAddress: store?.address ?? null,
+        cvsPhone: store?.phone ?? null,
         subtotal,
         shipFee: fee,
         total: subtotal + fee,
@@ -155,6 +174,9 @@ export async function createOrder(_prevState, form) {
 
     return order;
   });
+
+  // 門市已經寫進訂單，cookie 留著下次結帳反而會誤用
+  if (store) await clearSelectedStore();
 
   // 寄信失敗不該讓已經成立的訂單看起來像失敗，所以不往上丟
   try {

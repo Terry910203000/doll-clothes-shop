@@ -76,6 +76,17 @@ S3_PUBLIC_URL=https://你的專案代號.supabase.co/storage/v1/object/public/pr
 > 帶回的 `/api/ecpay/result`；部署到 Vercel 之後兩條都會正常運作。
 > 記得把 `APP_URL` 設成實際的網址，否則綠界會拿到錯的回呼位置。
 
+### 超商取貨
+
+門市電子地圖同樣在未設定時走綠界測試環境，現在就能選門市。
+注意**物流與金流是分開申請、分開開通**的服務：
+
+1. 綠界廠商後台申請開通「超商取貨」（C2C 店到店）
+2. 若物流的商店代號與金流不同，填進 `ECPAY_LOGISTICS_MERCHANT_ID`
+
+> 門市地圖的回呼（`/api/ecpay/cvs-reply`）是由消費者的瀏覽器送回來的，
+> 所以本機就能測試，不需要公開網址。
+
 ## 4. 推上 GitHub
 
 ```bash

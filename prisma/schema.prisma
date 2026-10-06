@@ -194,6 +194,13 @@ model Order {
   merchantTradeNo String? @unique // 我們送出去的那一組
   ecpayTradeNo    String? // 綠界回傳的那一組
 
+  // 超商取貨的門市。選擇一般宅配時這些欄位會是空的。
+  cvsSubType   String? // UNIMARTC2C（7-11）、FAMIC2C（全家）等
+  cvsStoreId   String?
+  cvsStoreName String?
+  cvsAddress   String?
+  cvsPhone     String?
+
   items OrderItem[]
 
   @@index([createdAt])
