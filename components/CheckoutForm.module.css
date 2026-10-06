@@ -1,0 +1,258 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: var(--c-text);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 手稿上用紅框框住的小標題 */
+.legend {
+  align-self: flex-start;
+  margin: 0;
+  padding: 7px 18px;
+  border: 1.5px solid #c0392b;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 420px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field input {
+  height: 44px;
+  padding-inline: 13px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+}
+
+.field input:focus-visible {
+  border-color: var(--c-logo);
+}
+
+.field input[aria-invalid="true"] {
+  border-color: #c0392b;
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: #c0392b;
+}
+
+.errorBox {
+  margin: 0;
+  padding: 13px 16px;
+  border-radius: 6px;
+  background: #f6e6e6;
+  font-size: 14px;
+  color: #a5342a;
+}
+
+/* 選項群組 */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.choicesLegend {
+  padding: 0 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 配送方式：手稿上是有外框的大選項 */
+.choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 520px;
+  padding: 15px 18px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.choice:hover {
+  border-color: var(--c-logo);
+}
+
+.choice:has(input:checked) {
+  border-color: var(--c-text);
+  background: #faf5f0;
+}
+
+.choiceFee {
+  margin-left: auto;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* 支付方式：手稿上是沒有外框的單純選項 */
+.choiceLine {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* 政策確認：有外框的長條 */
+.policy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 560px;
+  padding: 13px 18px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.policy:hover {
+  border-color: var(--c-logo);
+}
+
+.policy:has(input:checked) {
+  border-color: var(--c-text);
+  background: #faf5f0;
+}
+
+/* CSS Modules 要求選取器至少帶一個本地 class，所以收在 .form 底下 */
+.form input[type="radio"],
+.form input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  accent-color: var(--c-logo);
+  cursor: pointer;
+}
+
+.question {
+  margin: 0;
+  font-size: 15px;
+}
+
+.sourceRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sourceBtn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 20px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.sourceBtn:hover {
+  border-color: var(--c-logo);
+}
+
+.sourceBtn:has(input:checked) {
+  border-color: var(--c-text);
+  background: #faf5f0;
+}
+
+.sourceOther {
+  max-width: 320px;
+  height: 42px;
+  padding-inline: 13px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+}
+
+/* 金額 */
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 22px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #faf5f0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.totalFinal {
+  padding-top: 12px;
+  border-top: 1px solid var(--c-line);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.submit {
+  align-self: flex-end;
+  padding: 15px 64px;
+  border-radius: 6px;
+  background: var(--c-logo);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-indent: 0.2em;
+  transition: filter 0.18s ease;
+}
+
+.submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .submit {
+    align-self: stretch;
+    padding-inline: 0;
+  }
+}

@@ -96,20 +96,31 @@ async function main() {
   }
   console.log(`商品 ${products.length} 筆`);
 
-  // 後台管理員。密碼只存雜湊，登入時比對
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@example.com";
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "admin1234";
+  // 後台管理員。帳密一律從 .env 讀，不寫在程式碼裡，
+  // 否則推上 GitHub 等於公開密碼。
+  const adminEmail = process.env.SEED_ADMIN_EMAIL;
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+
+  if (!adminEmail || !adminPassword) {
+    throw new Error(
+      "缺少 SEED_ADMIN_EMAIL 或 SEED_ADMIN_PASSWORD，請參考 .env.example 設定 .env",
+    );
+  }
+
+  // 密碼只存 bcrypt 雜湊，資料庫被看到也還原不出原始密碼
+  const hash = await bcrypt.hash(adminPassword, 10);
 
   await prisma.user.upsert({
     where: { email: adminEmail },
-    update: { role: "ADMIN" },
-    create: {
-      email: adminEmail,
-      password: await bcrypt.hash(adminPassword, 10),
-      name: "管理員",
-      role: "ADMIN",
-    },
+    update: { password: hash, role: "ADMIN" },
+    create: { email: adminEmail, password: hash, name: "管理員", role: "ADMIN" },
   });
+
+  // 清掉先前版本留下的預設管理員
+  await prisma.user.deleteMany({
+    where: { email: "admin@example.com", NOT: { email: adminEmail } },
+  });
+
   console.log(`管理員帳號：${adminEmail}`);
 }
 

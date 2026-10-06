@@ -1,0 +1,121 @@
+.page {
+  padding-block: 40px 64px;
+  color: var(--c-text);
+}
+
+.heading {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  gap: 48px;
+  align-items: start;
+}
+
+/* 右側訂單摘要 */
+.summary {
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+  padding: 22px;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.summaryTitle {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--c-line);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.summaryName {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.summaryMeta {
+  font-size: 12px;
+  opacity: 0.65;
+}
+
+.summaryPrice {
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.editCart {
+  display: block;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--c-line);
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* 空購物車 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-block: 70px;
+}
+
+.empty p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.back {
+  padding: 12px 30px;
+  border: 1px solid var(--c-text);
+  border-radius: 6px;
+  font-size: 15px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.back:hover {
+  background: var(--c-text);
+  color: var(--c-page);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .summary {
+    position: static;
+    order: -1;
+  }
+
+  .heading {
+    font-size: 23px;
+  }
+}
