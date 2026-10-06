@@ -121,3 +121,18 @@
     font-size: 22px;
   }
 }
+
+.payAgain {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 20px;
+  padding: 13px 40px;
+  border-radius: 6px;
+  background: var(--c-logo);
+  color: #fff;
+  font-size: 15px;
+}
+
+.payAgain:hover {
+  filter: brightness(1.08);
+}

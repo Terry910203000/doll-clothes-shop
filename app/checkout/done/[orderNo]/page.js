@@ -9,8 +9,9 @@ export const dynamic = "force-dynamic";
 
 const twd = new Intl.NumberFormat("zh-TW");
 
-export default async function OrderDonePage({ params }) {
+export default async function OrderDonePage({ params, searchParams }) {
   const { orderNo } = await params;
+  const sp = await searchParams;
 
   const order = await prisma.order.findUnique({
     where: { orderNo },
@@ -21,7 +22,9 @@ export default async function OrderDonePage({ params }) {
 
   return (
     <div className={`container ${styles.page}`}>
-      <h1 className={styles.heading}>訂單已送出</h1>
+      <h1 className={styles.heading}>
+        {order.paymentStatus === "PAID" ? "付款完成" : "訂單已送出"}
+      </h1>
       <p className={styles.lead}>
         訂單編號 <strong>{order.orderNo}</strong>
       </p>
@@ -78,11 +81,22 @@ export default async function OrderDonePage({ params }) {
         </div>
       </div>
 
-      <p className={styles.note}>
-        {order.payment === "COD"
-          ? "商品將於出貨後以貨到付款方式收款。"
-          : "線上付款功能尚在串接中，賣家會另行與你聯絡付款方式。"}
-      </p>
+      {order.paymentStatus === "PAID" ? (
+        <p className={styles.note}>已收到款項，我們會盡快為你出貨。</p>
+      ) : order.payment === "COD" ? (
+        <p className={styles.note}>商品將於出貨後以貨到付款方式收款。</p>
+      ) : (
+        <>
+          <p className={styles.note}>
+            {sp?.pending
+              ? "這筆付款尚未完成。款項不會被扣除，你可以重新付款。"
+              : "這筆訂單還沒完成付款。"}
+          </p>
+          <Link href={`/pay/${order.orderNo}`} className={styles.payAgain}>
+            前往付款
+          </Link>
+        </>
+      )}
 
       <Link href="/" className={styles.back}>
         回首頁

@@ -190,6 +190,10 @@ model Order {
   createdAt DateTime @default(now())
   paidAt    DateTime?
 
+  // 綠界的交易編號。對帳與查詢客訴時需要，付款完成才會有值。
+  merchantTradeNo String? @unique // 我們送出去的那一組
+  ecpayTradeNo    String? // 綠界回傳的那一組
+
   items OrderItem[]
 
   @@index([createdAt])

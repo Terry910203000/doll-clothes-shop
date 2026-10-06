@@ -57,6 +57,25 @@ S3_PUBLIC_URL=https://你的專案代號.supabase.co/storage/v1/object/public/pr
 沒設定時信件內容只會印在伺服器日誌，網站其他功能不受影響。
 要真的寄出需要自有網域，步驟見 `.env.example`。
 
+## 3.5 金流（綠界 ECPay）
+
+**沒設定時自動使用綠界公開的測試商店**，整個付款流程可以完整跑完，
+但不會真的扣款。測試卡號 `4311-9522-2222-2222`，
+有效期限填任何未來日期，安全碼任意三碼。
+
+要真的收款才需要申請：
+
+1. 到 [ecpay.com.tw](https://www.ecpay.com.tw) 申請**特約商店**
+   （需要營業人登記或個人賣家身分審核，約數個工作天）
+2. 審核通過後在廠商後台取得 **MerchantID / HashKey / HashIV**
+3. 填進 `.env` 的 `ECPAY_MERCHANT_ID`、`ECPAY_HASH_KEY`、`ECPAY_HASH_IV`
+   —— 填了就會自動切到正式環境開始真的收款
+
+> **付款通知需要公開網址。** 綠界的伺服器要能連到 `/api/ecpay/notify`
+> 才能確認入帳，本機 localhost 它連不到。所以本機測試時入帳是靠瀏覽器
+> 帶回的 `/api/ecpay/result`；部署到 Vercel 之後兩條都會正常運作。
+> 記得把 `APP_URL` 設成實際的網址，否則綠界會拿到錯的回呼位置。
+
 ## 4. 推上 GitHub
 
 ```bash

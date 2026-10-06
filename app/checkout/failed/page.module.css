@@ -1,0 +1,54 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-block: 80px 96px;
+  text-align: center;
+  color: var(--c-text);
+}
+
+.heading {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.9;
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.primary,
+.secondary {
+  padding: 13px 32px;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.primary {
+  background: var(--c-logo);
+  color: #fff;
+}
+
+.primary:hover {
+  filter: brightness(1.08);
+}
+
+.secondary {
+  border: 1px solid var(--c-text);
+}
+
+.secondary:hover {
+  background: var(--c-text);
+  color: var(--c-page);
+}

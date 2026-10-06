@@ -166,7 +166,10 @@ export async function createOrder(_prevState, form) {
   revalidatePath("/cart");
   revalidatePath("/");
 
-  // TODO: 選擇 LINE PAY / 信用卡時，改導向金流商的付款頁
-  // （等綠界特約商店帳號申請完成、金鑰填入 .env 後接上）
-  redirect(`/checkout/done/${created.orderNo}`);
+  // 貨到付款當場就結束；線上付款要先去綠界
+  redirect(
+    created.payment === "COD"
+      ? `/checkout/done/${created.orderNo}`
+      : `/pay/${created.orderNo}`,
+  );
 }
