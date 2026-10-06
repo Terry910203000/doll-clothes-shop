@@ -42,7 +42,7 @@ npm run db:seed             # 放進分類、商品與管理員帳號
 3. 填進 `.env`（`你的專案代號` 就是網址 `https://xxxxx.supabase.co` 中的 xxxxx）：
 
 ```
-S3_ENDPOINT=https://你的專案代號.supabase.co/storage/v1/s3
+S3_ENDPOINT=https://你的專案代號.storage.supabase.co/storage/v1/s3
 S3_REGION=ap-southeast-1
 S3_ACCESS_KEY_ID=
 S3_SECRET_ACCESS_KEY=
