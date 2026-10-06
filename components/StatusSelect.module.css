@@ -1,0 +1,43 @@
+.select {
+  padding: 6px 10px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 13px;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.18s ease;
+}
+
+.select:hover:not(:disabled) {
+  border-color: var(--c-logo);
+}
+
+.select:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* 依狀態上色，一眼看出哪些還沒處理 */
+.UNPAID,
+.PENDING {
+  background: #f8ecd9;
+  color: #8a5a12;
+}
+
+.PAID,
+.RECEIVED {
+  background: #e7f0de;
+  color: #44671f;
+}
+
+.SHIPPED {
+  background: #e2ebf5;
+  color: #2f5278;
+}
+
+.REFUNDED {
+  background: #eee9e4;
+  color: #6b5a50;
+}

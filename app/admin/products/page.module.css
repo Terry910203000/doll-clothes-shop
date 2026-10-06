@@ -1,0 +1,96 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--c-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  background: #faf5f0;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.noImage {
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 14px 16px 16px;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.name:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.72;
+}
+
+.badge {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--c-bar);
+  color: #fff;
+  font-size: 11px;
+  opacity: 1;
+}
+
+.numbers {
+  margin: 0;
+  font-size: 13px;
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.sizes li {
+  padding: 3px 9px;
+  border: 1px solid var(--c-line);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.sizeOut {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}

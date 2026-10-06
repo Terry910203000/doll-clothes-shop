@@ -40,6 +40,24 @@ npm run db:studio                      # 用瀏覽器檢視資料
 npm run images
 ```
 
+## 後台
+
+登入後從右上角會員選單進入，或直接開 `/admin`。只有 `role` 為 `ADMIN`
+的帳號進得去，其他人會被導回首頁。
+
+| 頁面 | 說明 |
+| --- | --- |
+| `/admin` | 總覽：各項數量與待處理事項 |
+| `/admin/products` | 商品列表，含已售／總量／剩餘庫存 |
+| `/admin/products/new` | 新增商品（可多張上傳，自動壓縮成 WebP） |
+| `/admin/orders` | 訂單列表，付款／收貨狀態可直接下拉修改 |
+| `/admin/members` | 會員列表，備註欄離開欄位即自動儲存 |
+| `/admin/stats` | 銷售趨勢折線圖、今日／本月／今年、銷量排名 |
+
+後台上傳的圖片存在 `public/uploads/`（不進版控）。
+若日後要部署到 Vercel 這類唯讀檔案系統的平台，
+得改存到物件儲存服務（例如 S3、Cloudflare R2）。
+
 ## 配色
 
 全部定義在 `app/globals.css` 的 `:root`，改這裡就會全站同步。

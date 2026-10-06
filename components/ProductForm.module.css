@@ -1,0 +1,108 @@
+.sizes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sizeRow {
+  display: flex;
+  gap: 8px;
+}
+
+.sizeName,
+.sizeStock {
+  padding: 10px 12px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+}
+
+.sizeName {
+  flex: 1;
+  min-width: 0;
+}
+
+.sizeStock {
+  width: 110px;
+}
+
+.sizeRemove {
+  width: 38px;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--c-text);
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.sizeRemove:hover:not(:disabled) {
+  border-color: #c0392b;
+  background: #f9eceb;
+}
+
+.sizeRemove:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.addSize {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 8px 16px;
+  border: 1px dashed var(--c-line);
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--c-text);
+  transition: border-color 0.18s ease;
+}
+
+.addSize:hover {
+  border-color: var(--c-logo);
+}
+
+/* 既有照片 */
+.existing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.existingItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.existingMedia {
+  position: relative;
+  display: block;
+  width: 110px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--c-line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.existingImg {
+  object-fit: cover;
+}
+
+.existingCheck {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.existingCheck input {
+  width: 15px;
+  height: 15px;
+  accent-color: #c0392b;
+}

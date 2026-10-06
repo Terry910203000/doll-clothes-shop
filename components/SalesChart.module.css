@@ -1,0 +1,65 @@
+.figure {
+  margin: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.axis {
+  font-size: 11px;
+  fill: rgba(99, 49, 49, 0.62);
+}
+
+.tooltip {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 10px 0 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #faf5f0;
+  font-size: 14px;
+}
+
+.tooltipAmount {
+  margin-left: auto;
+  opacity: 0.75;
+}
+
+.tooltipHint {
+  margin: 10px 0 0;
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+/* 表格檢視：不依賴滑鼠或顏色也讀得到數據 */
+.table {
+  margin-top: 14px;
+  font-size: 13px;
+}
+
+.table summary {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.table table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 7px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--c-line);
+}
+
+.table th {
+  font-weight: 600;
+  opacity: 0.75;
+}
