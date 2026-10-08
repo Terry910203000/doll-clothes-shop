@@ -3,7 +3,7 @@
   top: 0;
   z-index: 50;
   background: var(--c-bar);
-  border-bottom: 1px solid rgba(99, 49, 49, 0.16);
+  border-bottom: 1px solid rgba(95, 87, 79, 0.18);
 }
 
 .inner {
@@ -17,7 +17,7 @@
   max-width: var(--page-max);
   margin-inline: auto;
   padding-inline: var(--page-gutter);
-  color: var(--c-logo);
+  color: var(--c-text);
 }
 
 .logo {
@@ -52,14 +52,12 @@
 }
 
 .iconBtn:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
 }
 
 @media (max-width: 520px) {
   .logo {
-    font-size: 21px;
-    letter-spacing: 0.26em;
-    text-indent: 0.26em;
+    font-size: 25px;
   }
 
   .iconBtn {

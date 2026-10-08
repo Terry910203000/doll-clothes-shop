@@ -6,7 +6,6 @@ const twd = new Intl.NumberFormat("zh-TW");
 
 /**
  * 商品卡：照片 ／ 品名 ／ 價格
- * 色塊底色由 ProductGrid 的 nth-child 交錯決定，沒照片時才看得到。
  */
 export default function ProductCard({ product, priority = false }) {
   const cover = product.images?.[0];

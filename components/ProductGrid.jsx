@@ -3,7 +3,6 @@ import styles from "./ProductGrid.module.css";
 
 /**
  * 商品網格，桌機三欄、手機兩欄。
- * 卡片底色依手繪稿交錯使用兩個褐色（沒照片時才看得到）。
  */
 export default function ProductGrid({ products = [], title }) {
   if (products.length === 0) {
@@ -20,8 +19,7 @@ export default function ProductGrid({ products = [], title }) {
 
       <ul className={styles.grid}>
         {products.map((product, i) => (
-          <li key={product.id} className={styles.cell}>
-            {/* 前三張是首屏內容，優先載入避免版面跳動 */}
+          <li key={product.id}>
             <ProductCard product={product} priority={i < 3} />
           </li>
         ))}

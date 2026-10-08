@@ -1,33 +1,24 @@
 /* ============================================================
    設計代幣 (Design Tokens)
-   顏色全部來自手繪稿上的 RGB 標註
+   顏色取樣自品牌設計稿，改這一段就會全站同步
    ============================================================ */
 :root {
-  /* 頂部列底色 R189 G154 B130 */
-  --c-bar: rgb(189, 154, 130);
-  /* LOGO / 頂部圖示 R147 G90 B36 */
-  --c-logo: rgb(147, 90, 36);
-  /* 主打商品橫幅 R147 G102 B35 */
-  --c-banner: rgb(147, 102, 35);
-  /* 商品文字 / 價格 / 社群圖示 R99 G49 B49 */
-  --c-text: rgb(99, 49, 49);
+  /* 配色取樣自品牌設計稿 */
+  --c-page: #d0cbc5; /* 最外層背景 */
+  --c-bar: #cec5be; /* 頂部列 */
+  --c-surface: #efebe8; /* 內容區與卡片 */
+  --c-text: #5f574f; /* 文字，比設計稿略深以確保對比足夠 */
+  --c-muted: #8b8591; /* 卡片邊框與次要文字 */
+  --c-line: #c9c3bd; /* 分隔線 */
+  /* 按鈕等強調色。沿用 --c-logo 這個名稱，站內多處已引用。 */
+  --c-logo: #6f6760;
 
-  /* 商品卡片棋盤交錯用的兩個底色 */
-  --c-card-a: rgb(189, 154, 130);
-  --c-card-b: rgb(147, 102, 35);
+  /* 側邊分類選單與會員選單，調成與新配色相襯 */
+  --c-menu-pink: #e8dfdb;
+  --c-menu-blue: #dee2e8;
 
-  /* 手稿上的側邊選單粉紅 / 會員選單淺藍 */
-  --c-menu-pink: #f7dfe8;
-  --c-menu-blue: #dce8f7;
-
-  /* 中性色 */
-  --c-page: #fdfbf8;
-  --c-line: #d8cec6;
-  --c-white: #ffffff;
-
-  /* 版面尺寸 */
   --header-h: 64px;
-  --page-max: 1180px;
+  --page-max: 1120px;
   --page-gutter: 16px;
 }
 
@@ -48,9 +39,22 @@ body {
 body {
   background: var(--c-page);
   color: var(--c-text);
-  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui,
-    -apple-system, "Segoe UI", sans-serif;
+  /* 指定的 MS UI Gothic 與 Microsoft JhengHei UI 都是 Windows 內建字體，
+     Mac、iPhone、Android 上不存在，所以後面接一串各平台的對應字體，
+     讓非 Windows 的訪客也能看到相近的結果。 */
+  font-family: "MS UI Gothic", "Microsoft JhengHei UI", "Microsoft JhengHei",
+    "PingFang TC", "Hiragino Sans", "Noto Sans TC", system-ui, -apple-system,
+    "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 內容像一張紙鋪在較深的底色上（設計稿的作法） */
+.sheet {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  background: var(--c-surface);
+  min-height: 60vh;
 }
 
 a {

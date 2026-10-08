@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/lib/auth";
 import "./globals.css";
 
 export const metadata = {
-  title: "LOGO｜娃娃衣專賣",
+  title: "Sui｜娃娃衣專賣",
   description: "手作娃娃衣專賣店，提供 30CM / 16CM / 10CM 各尺寸娃衣。",
 };
 
@@ -31,8 +31,10 @@ export default async function RootLayout({ children }) {
       </head>
       <body>
         <SiteHeader categories={categories} user={user} />
-        <main>{children}</main>
-        <SiteFooter />
+        <div className="sheet">
+          <main>{children}</main>
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );

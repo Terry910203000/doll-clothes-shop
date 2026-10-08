@@ -8,8 +8,7 @@ import MemberMenu from "./MemberMenu";
 import styles from "./SiteHeader.module.css";
 
 /**
- * 頂部列：漢堡選單（左）／ LOGO（中）／ 會員 + 購物車（右）
- * 底色 rgb(189,154,130)，文字與圖示 rgb(147,90,36)。
+ * 頂部列：漢堡選單（左）／ 品牌名（中）／ 會員 + 購物車（右）
  */
 export default function SiteHeader({ categories = [], user = null }) {
   const [sideOpen, setSideOpen] = useState(false);
@@ -36,7 +35,7 @@ export default function SiteHeader({ categories = [], user = null }) {
           </button>
 
           <Link href="/" className={styles.logo}>
-            LOGO
+            Sui
           </Link>
 
           <div className={styles.actions}>

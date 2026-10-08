@@ -8,14 +8,16 @@
 
 .media {
   position: relative;
-  display: grid;
-  place-items: center;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 6px;
-  /* 底色由 ProductGrid 以 CSS 變數交錯指定 */
-  background: var(--card-bg, var(--c-card-a));
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  /* 設計稿的商品圖是細框、白底 */
+  border: 1px solid var(--c-muted);
+  background: #fff;
+  transition: border-color 0.2s ease;
+}
+
+.link:hover .media {
+  border-color: var(--c-text);
 }
 
 /* next/image 的 fill 模式會絕對定位填滿 .media */
@@ -23,49 +25,38 @@
   object-fit: cover;
 }
 
-.link:hover .media {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(99, 49, 49, 0.18);
-}
-
-/* 尚未放照片時，在色塊中間標示尺寸 */
+/* 尚未放照片時，色塊中間標示尺寸 */
 .mediaLabel {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 15px;
-  letter-spacing: 0.18em;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--c-muted);
+  font-size: 14px;
+  letter-spacing: 0.16em;
 }
 
 .name {
-  margin: 14px 0 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--c-line);
+  margin: 10px 0 0;
   color: var(--c-text);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   line-height: 1.5;
 }
 
 .price {
-  margin: 10px 0 0;
+  margin: 4px 0 0;
   color: var(--c-text);
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 14px;
 }
 
 .currency {
-  margin-right: 4px;
-  font-size: 13px;
-  font-weight: 500;
-  opacity: 0.75;
+  margin-right: 3px;
 }
 
 @media (max-width: 640px) {
-  .name {
-    font-size: 14px;
-  }
-
+  .name,
   .price {
-    font-size: 15px;
+    font-size: 13px;
   }
 }
