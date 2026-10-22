@@ -29,6 +29,36 @@
   color: var(--c-page);
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.contactRow {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.contactRow dt {
+  opacity: 0.7;
+}
+
+.contactRow dd {
+  margin: 0;
+}
+
+.contactRow a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .copy {
   margin: 0;
   font-size: 13px;
