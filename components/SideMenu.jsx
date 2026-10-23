@@ -71,6 +71,11 @@ export default function SideMenu({ open, onClose, categories = [] }) {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/contact" className={styles.link} onClick={onClose}>
+                聯絡我們
+              </Link>
+            </li>
           </ul>
         </nav>
       </aside>
