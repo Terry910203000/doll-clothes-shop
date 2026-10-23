@@ -46,6 +46,8 @@ export default function SiteFooter() {
         </ul>
       )}
 
+      <h2 className={styles.contactTitle}>客服資訊</h2>
+
       <dl className={styles.contact}>
         {email && (
           <div className={styles.contactRow}>
